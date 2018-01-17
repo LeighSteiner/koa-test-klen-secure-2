@@ -89,4 +89,34 @@ describe('routes : movies', () => {
     });
   });
 });
+ describe('POST /api/v1/movies', () => {
+  it('should return the movie that was added', (done) => {
+    chai.request(server)
+    .post('/api/v1/movies')
+    .send({
+      name: 'Titanic',
+      genre: 'Drama',
+      rating: 8,
+      explicit: true
+    })
+    .end((err, res) => {
+      // there should be no errors 
+      should.not.exist(err);
+      // there should be a 201 status code
+      // (indicating that something was "created")
+      res.status.should.equal(201);
+      // the response should be JSON
+      res.type.should.equal('application/json');
+      // the JSON response body should have a
+      // key-value pair of {"status": "success"}
+      res.body.status.should.eql('success');
+      // the JSON response body should have a
+      // key-value pair of {"data": 1 movie object}
+      res.body.data[0].should.include.keys(
+        'id', 'name', 'genre', 'rating', 'explicit'
+      );
+      done();
+    });
+  });
+});
 })
