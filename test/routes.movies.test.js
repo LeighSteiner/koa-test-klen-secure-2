@@ -100,7 +100,7 @@ describe('routes : movies', () => {
       explicit: true
     })
     .end((err, res) => {
-      // there should be no errors 
+      // there should be no errors not a single one 
       should.not.exist(err);
       // there should be a 201 status code
       // (indicating that something was "created")
