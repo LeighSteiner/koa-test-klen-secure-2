@@ -27,6 +27,7 @@ app.use(passport.session());
 
 app.use(indexRoutes.routes());
 app.use(movieRoutes.routes());
+app.use(authroutes.routes());
 
 // app.use(async (ctx) => {
 //   ctx.body = {
