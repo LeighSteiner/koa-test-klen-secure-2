@@ -51,7 +51,7 @@ describe('routes : auth', () => {
     });
   });
 });
-  
+
   describe('GET /auth/login', () => {
   it('should render the login view', (done) => {
     chai.request(server)
@@ -64,6 +64,20 @@ describe('routes : auth', () => {
       res.text.should.contain('<h1>Login</h1>');
       res.text.should.contain(
         '<p><button type="submit">Log In</button></p>');
+      done();
+    });
+  });
+});
+  describe('POST /auth/login', () => {
+  it('should login a user', (done) => {
+    chai.request(server)
+    .post('/auth/login')
+    .send({
+      username: 'jeremy',
+      password: 'johnson'
+    })
+    .end((err, res) => {
+      res.redirects[0].should.contain('/auth/status');
       done();
     });
   });
