@@ -51,5 +51,22 @@ describe('routes : auth', () => {
     });
   });
 });
+  
+  describe('GET /auth/login', () => {
+  it('should render the login view', (done) => {
+    chai.request(server)
+    .get('/auth/login')
+    .end((err, res) => {
+      should.not.exist(err);
+      res.redirects.length.should.eql(0);
+      res.status.should.eql(200);
+      res.type.should.eql('text/html');
+      res.text.should.contain('<h1>Login</h1>');
+      res.text.should.contain(
+        '<p><button type="submit">Log In</button></p>');
+      done();
+    });
+  });
+});
 
 });

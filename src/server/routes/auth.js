@@ -32,6 +32,14 @@ router.get('/auth/status', async (ctx) => {
   }
 });
 
+router.get('/auth/login', async (ctx) => {
+  if (!ctx.isAuthenticated()) {
+    ctx.type = 'html';
+    ctx.body = fs.createReadStream('./src/server/views/login.html')
+  } else {
+    ctx.redirect('/auth/status');
+  }
+})
 
 
 
