@@ -53,8 +53,15 @@ router.post('/auth/login', async (ctx) => {
   })(ctx);
 })
 
-
-
+router.get('/auth/logout', async (ctx) => {
+  if (ctx.isAuthenticated()) {
+    ctx.logout();
+    ctx.redirect('/auth/login');
+  } else {
+    ctx.body = { success: false };
+    ctx.throw(401);
+  }
+});
 
 
 
