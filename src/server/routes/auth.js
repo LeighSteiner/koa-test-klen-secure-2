@@ -50,7 +50,7 @@ router.post('/auth/login', async (ctx) => {
       ctx.status = 400;
       ctx.body = { status: 'error' } 
     }
-  })
+  })(ctx);
 })
 
 
