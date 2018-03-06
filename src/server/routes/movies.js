@@ -1,12 +1,25 @@
 const Router = require('koa-router');
 const queries = require('../db/queries/movies');
+// const klenSecure = require('./klen-secure-test.js')();
 
+
+// const mockAuths = { 
+//   oddUser : async () => !!ctx.state.user.id%2,  
+//   beFalse : async () => false,
+//   beTrue : async () => true,
+// }
+// const klen = new klenSecure(null, mockAuths, true, 'koa')
+
+let count = 0;
 const router = new Router();
 const BASE_URL = `/api/v1/movies`;
-
-router.get(BASE_URL, async (ctx) => {
+// router.use((ctx) => {
+//   console.log(ctx.state.user)
+// })
+// router.use(klen.authFailLogger('beTrue'))
+router.get(BASE_URL , async (ctx) => {
   try{
-  	const movies = await queries.getAllMovies();
+      	const movies = await queries.getAllMovies();
   	ctx.body = {
   	  status: 'success', 
   	  data: movies
@@ -114,4 +127,11 @@ router.delete(`${BASE_URL}/:id`, async (ctx) => {
 	  };
 	}
 })
+
+
+
+
+
+
+
 module.exports = router;
